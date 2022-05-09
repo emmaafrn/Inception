@@ -1,0 +1,35 @@
+version: "3"
+services:
+    db:
+        build:
+            context: requirements/mariadb/.
+        volumes:
+            - db_data:/var/lib/mysql
+        container_name: database
+        restart: always
+        ports:
+            - '3306:3306'
+    wordpress:
+        depends_on:
+            - db
+        build:
+            context: requirements/wordpress/.
+        ports:
+            - "80:80"
+        restart: always
+    nginx:
+        depends_on:
+            - wordpress
+        restart: always
+        build:
+            context: requirements/nginx/.
+        container_name: nginx
+        ports:
+            - 80:80
+        volumes:
+            - wp_volume:/var/www/html/
+        stdin_open: true
+        tty: true
+volumes:
+    db_data: {}
+    wp_volume: {}
