@@ -1,7 +1,7 @@
 FROM alpine:3.14.0
 
-COPY start.sh /data/.
-WORKDIR /data/.
+WORKDIR /test
+COPY start.sh /test
 RUN apk add --update php7-fpm php7-json php7-zlib php7-xml php7-xmlwriter php7-simplexml php7-pdo php7-phar php7-openssl \
     php7-pdo_mysql php7-mysqli php7-session \
     php7-gd php7-iconv php7-mcrypt php7-gmp php7-zip \
@@ -14,6 +14,7 @@ RUN apk add --update \
 		&& curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  \
 		&& chmod +x wp-cli.phar \
 		&& mv wp-cli.phar /usr/bin/wp
+RUN apk add vim
 RUN apk --update add --no-cache \
 		bash \
 		curl \

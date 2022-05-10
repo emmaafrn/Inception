@@ -9,14 +9,17 @@ services:
         restart: always
         ports:
             - '3306:3306'
+        env_file: .env
     wordpress:
         depends_on:
             - db
         build:
             context: requirements/wordpress/.
+        container_name: wordpress
         ports:
-            - "80:80"
+            - "8080:80"
         restart: always
+        env_file: .env
     nginx:
         depends_on:
             - wordpress
@@ -25,11 +28,12 @@ services:
             context: requirements/nginx/.
         container_name: nginx
         ports:
-            - 80:80
+            - 443:443
         volumes:
             - wp_volume:/var/www/html/
         stdin_open: true
         tty: true
+        env_file: .env
 volumes:
     db_data: {}
     wp_volume: {}
