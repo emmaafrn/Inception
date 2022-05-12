@@ -18,6 +18,8 @@ services:
         container_name: wordpress
         ports:
             - "8080:80"
+        volumes:
+            - wp_volume:/var/www/html/
         restart: always
         env_file: .env
     nginx:
@@ -28,12 +30,13 @@ services:
             context: requirements/nginx/.
         container_name: nginx
         ports:
-            - 443:443
+            - '443:443'
         volumes:
             - wp_volume:/var/www/html/
         stdin_open: true
         tty: true
         env_file: .env
+
 volumes:
     db_data: {}
     wp_volume: {}

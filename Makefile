@@ -13,9 +13,9 @@ prune :
 build :
 	@docker-compose -f srcs/docker-compose.yml up --build
 wordpress : 
-	@docker build -it wordpress bash
+	@docker exec -it wordpress bash
 nginx :
-	@docker build -it nginx bash
+	@docker exec -it nginx bash
 db :
-	@docker build -it db bash
+	@docker exec -it database bash
 re : clean build
