@@ -32,7 +32,7 @@ services:
         ports:
             - '443:443'
         volumes:
-            - wp_volume:/var/www/html/
+            - wp_volume:/data
         stdin_open: true
         tty: true
         env_file: .env
