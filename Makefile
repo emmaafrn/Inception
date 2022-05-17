@@ -1,7 +1,7 @@
 NAME=INCEPTION
 
 all:
-	@docker-compose -f srcs/docker-compose.yml up --build						#add -d for free terminal
+	@docker-compose -f srcs/docker-compose.yml --env-file srcs/.env up --build						#add -d for free terminal
 down:
 	@docker-compose -f srcs/docker-compose.yml down
 clean:
@@ -13,7 +13,7 @@ clean:
 prune :
 	@docker system prune -f --all
 build :
-	@docker-compose -f srcs/docker-compose.yml up --build
+	@docker-compose -f srcs/docker-compose.yml --env-file srcs/.env up --build
 wordpress : 
 	@docker exec -it wordpress bash
 nginx :

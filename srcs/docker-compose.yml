@@ -3,12 +3,13 @@ services:
     db:
         build:
             context: requirements/mariadb/.
+            args:
+                MYSQL_USER: ${MYSQL_USER}
+                MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         volumes:
             - db_data:/var/lib/mysql
         container_name: database
         restart: always
-        ports:
-            - '3306:3306'
         env_file: .env
     wordpress:
         depends_on:
@@ -16,8 +17,6 @@ services:
         build:
             context: requirements/wordpress/.
         container_name: wordpress
-        ports:
-            - "8080:80"
         volumes:
             - wp_volume:/var/www/html/
         restart: always
@@ -32,7 +31,7 @@ services:
         ports:
             - '443:443'
         volumes:
-            - wp_volume:/data
+            - wp_volume:/var/www/html/
         stdin_open: true
         tty: true
         env_file: .env
