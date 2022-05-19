@@ -8,7 +8,7 @@ clean:
 	@docker stop $$(docker ps -a -q)
 	@docker rm $$(docker ps -a -q)
 	@docker system prune -f
-	@docker volume rm srcs_db_data 
+	@docker volume rm srcs_db_volume
 	@docker volume rm srcs_wp_volume
 prune :
 	@docker system prune -f --all
