@@ -11,6 +11,8 @@ services:
         container_name: database
         restart: always
         env_file: .env
+        networks:
+            - mynetwork
     wordpress:
         depends_on:
             - db
@@ -21,6 +23,8 @@ services:
             - wp_volume:/var/www/html/
         restart: always
         env_file: .env
+        networks:
+            - mynetwork
     nginx:
         depends_on:
             - wordpress
@@ -35,6 +39,12 @@ services:
         stdin_open: true
         tty: true
         env_file: .env
+        networks:
+            - mynetwork
+
 volumes:
     db_volume: {}
     wp_volume: {}
+
+networks:
+    mynetwork:
