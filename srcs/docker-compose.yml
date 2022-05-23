@@ -43,8 +43,16 @@ services:
             - mynetwork
 
 volumes:
-    db_volume: {}
-    wp_volume: {}
+    db_volume:
+        driver_opts:
+            type: none
+            o: bind
+            device: "/home/efarin/data/db_volume"
+    wp_volume:
+        driver_opts:
+            type: none
+            o: bind
+            device: "/home/efarin/data/wp_volume"
 
 networks:
     mynetwork:
