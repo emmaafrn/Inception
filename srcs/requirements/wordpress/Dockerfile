@@ -16,8 +16,8 @@ RUN apk add --update wget curl bash util-linux openrc mysql-client git\
 
 COPY www.conf /etc/php7/php-fpm.d/www.conf
 
-WORKDIR /var/www/html/wordpress
+WORKDIR /tmp
 
-COPY start.sh .
+COPY ./start.sh .
 
-CMD	/bin/bash start.sh
+CMD	["/bin/bash", "start.sh"]

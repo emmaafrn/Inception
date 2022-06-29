@@ -44,11 +44,13 @@ services:
 
 volumes:
     db_volume:
+        driver: local
         driver_opts:
             type: none
             o: bind
             device: "/home/efarin/data/db_volume"
     wp_volume:
+        driver: local
         driver_opts:
             type: none
             o: bind
